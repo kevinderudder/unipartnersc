@@ -70,7 +70,6 @@ namespace ATM.Ui
             double amount = ShowHowMuchMoneyToConvertLine();
             double amountInDollar = Math.Round(Money.ConvertToDollar(amount));
             Console.WriteLine($"> {amount}euro is gelijk aan {amountInDollar}dollar");
-
         }
 
         private static double ShowHowMuchMoneyToConvertLine()

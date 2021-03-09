@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ATM.Logic
 {
-    public class Money
+    public static class Money
     {
+        private static double rate = 1.19;
         public static double ConvertToDollar(double amount) {
-            return amount * 1.19;
+            return amount * rate;
         }
 
     }

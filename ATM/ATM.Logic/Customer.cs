@@ -8,6 +8,7 @@ namespace ATM.Logic
     {
         public string CustomerNumber { get; set; }
         public BankAccount BankAccount { get; private set; }
+        public List<BankAccount> BankAccounts { get; set; }
         public Bank Bank { get; set; }
 
         public Customer(string firstName, string lastName) 
