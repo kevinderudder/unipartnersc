@@ -65,7 +65,8 @@ namespace ATM.Logic
         public void WithdrawFromDeposit(double amount) {
             if (amount > this.Deposit)
             {
-                //TODO: unsufficient funds
+                InsufficientFundsException ex = new InsufficientFundsException(amount, Deposit);
+                throw ex;
             }
             else {
                 this.Deposit -= amount;
@@ -75,7 +76,7 @@ namespace ATM.Logic
         public void WithdrawFromSavings(double amount) {
             if (amount > this.Savings)
             {
-                //TODO: unsufficient funds
+                throw new InsufficientFundsException(amount, Savings);
             }
             else {
                 this.Savings -= amount;

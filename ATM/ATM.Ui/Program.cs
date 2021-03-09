@@ -5,43 +5,33 @@ namespace ATM.Ui
 {
     class Program
     {
-
         static BankAccount bankAccount;
 
         static void Main(string[] args)
         {
-
-            //Customer c = new Customer("kevin", "derudder");
-            //// POLYMORPHISM
-            //c.Bank = new KbcBank();
-
-            ////BankAccount ba = c.Bank.CreateBankAccount();
-
-            ////c.Bank = new IngBank();
-            ////c.Bank = new Bloedworst(); // ERROR
-
             LoadBankAccount();
             ShowMainMenu();
-
-            //Person p = new Person();
-           
-            
         }
 
-        static void LoadBankAccount() {
+        static void LoadBankAccount()
+        {
             bankAccount = new BankAccount("12345678");
         }
 
-        static void ShowMainMenu() {
+        static void ShowMainMenu()
+        {
 
             string input;
 
-            do {
+            do
+            {
                 Console.WriteLine("> 1. Haal geld van zichtrekening");
                 Console.WriteLine("> 2. Haal geld van spaarrekening");
                 Console.WriteLine("> 3. Stort geld op zichtrekening");
                 Console.WriteLine("> 4. Stort geld op spaarrekening");
                 Console.WriteLine("> 5. Saldoweergave");
+                Console.WriteLine("> 6. Zet euro om naar dollar");
+                Console.WriteLine("> 7. Zet dollar om naar euro");
                 Console.WriteLine("> Maak een keuze, druk X om te stoppen");
 
                 input = Console.ReadLine();
@@ -57,24 +47,47 @@ namespace ATM.Ui
                     int choice = 5;
                     Int32.TryParse(input, out choice);
 
-                    switch (choice) {
-                        case 1: WithdrawFromDeposit();break;
+                    switch (choice)
+                    {
+                        case 1: WithdrawFromDeposit(); break;
                         case 2: WithdrawFromSavings(); break;
-                        case 3: AddToDeposit();break;
-                        case 4: AddToSavings();break;
+                        case 3: AddToDeposit(); break;
+                        case 4: AddToSavings(); break;
+                        case 6: ConvertToEur();break;
+                        case 7: ConvertToDollar();break;
                         case 5:
-                        default: Console.WriteLine(bankAccount);break;
+                        default: Console.WriteLine(bankAccount); break;
                     }
 
                     Console.WriteLine($"bedankt voor u keuze: {choice}");
                 }
             }
             while (input.ToUpper() != "X");
-            
+        }
+
+        private static void ConvertToDollar()
+        {
+            double amount = ShowHowMuchMoneyToConvertLine();
+            double amountInDollar = Math.Round(Money.ConvertToDollar(amount));
+            Console.WriteLine($"> {amount}euro is gelijk aan {amountInDollar}dollar");
 
         }
 
-        public static void AddToDeposit() {
+        private static double ShowHowMuchMoneyToConvertLine()
+        {
+            Console.WriteLine("> Hoeveel geld wil je omzetten?");
+            double amount = Convert.ToDouble(Console.ReadLine());
+            return amount;
+          
+        }
+
+        private static void ConvertToEur()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void AddToDeposit()
+        {
             double amount = ShowHowMuchMoneyLine(false);
             bankAccount.AddToDeposit(amount);
             Console.WriteLine($"uw zichtrekeningsaldo is {bankAccount.Deposit}€");
@@ -87,28 +100,47 @@ namespace ATM.Ui
             Console.WriteLine($"uw spaarrekeningsaldo is {bankAccount.Savings}€");
         }
 
-        public static void WithdrawFromDeposit() {
-            double amount = ShowHowMuchMoneyLine(true);
-            bankAccount.WithdrawFromDeposit(amount);
-            Console.WriteLine($"uw zichtrekeningsaldo is {bankAccount.Deposit}€");
+        public static void WithdrawFromDeposit()
+        {
+            try
+            {
+                double amount = ShowHowMuchMoneyLine(true);
+                bankAccount.WithdrawFromDeposit(amount);
+                Console.WriteLine($"uw zichtrekeningsaldo is {bankAccount.Deposit}€");
+            }
+            catch (InsufficientFundsException ex)
+            {
+                Console.WriteLine("ERROR");
+                Console.WriteLine("*****");
+                Console.WriteLine($" > U probeerde {ex.RequestedAmount}euro af te halen, er is maar {ex.AvailableAmount}euro beschikbaar");
+            }
         }
 
         public static void WithdrawFromSavings()
         {
-            double amount = ShowHowMuchMoneyLine(true);
-            bankAccount.WithdrawFromSavings(amount);
-            Console.WriteLine($"uw spaarrekeningsaldo is {bankAccount.Savings}€");
+            try {
+                double amount = ShowHowMuchMoneyLine(true);
+                bankAccount.WithdrawFromSavings(amount);
+                Console.WriteLine($"uw spaarrekeningsaldo is {bankAccount.Savings}€");
+            }
+            catch (InsufficientFundsException ex) {
+                Console.WriteLine("ERROR");
+                Console.WriteLine("*****");
+                Console.WriteLine($" > U probeerde {ex.RequestedAmount}euro af te halen, er is maar {ex.AvailableAmount}euro beschikbaar");
+            }
         }
 
-        public static double ShowHowMuchMoneyLine(bool isWithdraw) {
+        public static double ShowHowMuchMoneyLine(bool isWithdraw)
+        {
             if (isWithdraw)
             {
                 Console.WriteLine("> Hoeveel geld had u willen opnemen");
             }
-            else {
+            else
+            {
                 Console.WriteLine("> Hoeveel geld had u willen storten");
             }
-            
+
             string input = Console.ReadLine();
             double amount = 0;
             double.TryParse(input, out amount);
