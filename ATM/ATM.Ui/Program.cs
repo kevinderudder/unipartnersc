@@ -12,6 +12,10 @@ namespace ATM.Ui
         {
             LoadBankAccount();
             ShowMainMenu();
+
+            //Person p = new Person();
+           
+            
         }
 
         static void LoadBankAccount() {
@@ -39,6 +43,7 @@ namespace ATM.Ui
                 else
                 {
                     //int choice = Convert.ToInt32(input);
+
                     int choice = 5;
                     Int32.TryParse(input, out choice);
 

@@ -82,7 +82,6 @@ namespace ATM.Logic
             }
         }
 
-
         // overrides
         public override string ToString() {
             return $"Uw saldo bedraagt: \n Zichtrekening: {this.Deposit} \n Spaarrekening: {this.Savings}";
