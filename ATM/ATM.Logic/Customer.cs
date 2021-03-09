@@ -7,6 +7,8 @@ namespace ATM.Logic
     public sealed class Customer : Person
     {
         public string CustomerNumber { get; set; }
+        public BankAccount BankAccount { get; private set; }
+        public Bank Bank { get; set; }
 
         public Customer(string firstName, string lastName) 
             :base(firstName, lastName)
@@ -17,6 +19,16 @@ namespace ATM.Logic
             :base(firstName, lastName)
         {
             CustomerNumber = customerNumber;
+        }
+
+        public void AddBank(Bank b) {
+            Bank = b;
+        }
+
+        public void CreateBankAccount() {
+            string accountNumber = Bank.GenerateBankAccountNumber();
+            BankAccount newBankAccount = new BankAccount(accountNumber);
+            BankAccount = newBankAccount;
         }
     }
 

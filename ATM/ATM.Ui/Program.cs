@@ -10,6 +10,16 @@ namespace ATM.Ui
 
         static void Main(string[] args)
         {
+
+            //Customer c = new Customer("kevin", "derudder");
+            //// POLYMORPHISM
+            //c.Bank = new KbcBank();
+
+            ////BankAccount ba = c.Bank.CreateBankAccount();
+
+            ////c.Bank = new IngBank();
+            ////c.Bank = new Bloedworst(); // ERROR
+
             LoadBankAccount();
             ShowMainMenu();
 
