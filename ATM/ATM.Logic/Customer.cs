@@ -10,12 +10,10 @@ namespace ATM.Logic
         public BankAccount BankAccount { get; private set; }
         public List<BankAccount> BankAccounts { get; set; }
         public IBanking Bank { get; set; }
-
         public Customer(string firstName, string lastName) 
             :base(firstName, lastName)
         {
         }
-
         public Customer(string firstName, string lastName, string customerNumber) 
             :base(firstName, lastName)
         {
