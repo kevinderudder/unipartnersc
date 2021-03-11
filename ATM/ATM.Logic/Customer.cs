@@ -9,7 +9,7 @@ namespace ATM.Logic
         public string CustomerNumber { get; set; }
         public BankAccount BankAccount { get; private set; }
         public List<BankAccount> BankAccounts { get; set; }
-        public Bank Bank { get; set; }
+        public IBanking Bank { get; set; }
 
         public Customer(string firstName, string lastName) 
             :base(firstName, lastName)
@@ -22,7 +22,7 @@ namespace ATM.Logic
             CustomerNumber = customerNumber;
         }
 
-        public void AddBank(Bank b) {
+        public void AddBank(IBanking b) {
             Bank = b;
         }
 

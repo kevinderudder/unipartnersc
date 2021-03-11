@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ATM.Logic
 {
-    public class Bank
+    public class Bank:IBanking
     {
         public string Title { get; set; }
         public string Address { get; set; }
+        public List<Customer> Customers { get; set; }
 
         public BankAccount CreateBankAccount() {
             BankAccount newBankAccount = new BankAccount(GenerateBankAccountNumber());

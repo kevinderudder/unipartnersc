@@ -4,18 +4,22 @@ using System.Text;
 
 namespace ATM.Logic
 {
-    public class KbcBank : Bank, ICrypto
+    public class RevolutBank : IBanking, ICrypto
     {
         public void BuyCoins(int amount)
         {
             throw new NotImplementedException();
         }
 
-        public override string GenerateBankAccountNumber()
+        public BankAccount CreateBankAccount()
         {
-            //return base.GenerateBankAccountNumber();
-            //return "KBC-12345678";
-            return "KBC-" + base.GenerateBankAccountNumber();
+            BankAccount ba = new BankAccount(GenerateBankAccountNumber());
+            return ba;
+        }
+
+        public string GenerateBankAccountNumber()
+        {
+            return $"REVO-1234567KJHGF";
         }
 
         public void SellCoins(int amount)
