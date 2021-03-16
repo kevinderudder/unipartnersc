@@ -175,6 +175,7 @@
             this.AddToSavingsButton.TabIndex = 0;
             this.AddToSavingsButton.Text = "+ Add to Savings";
             this.AddToSavingsButton.UseVisualStyleBackColor = true;
+            this.AddToSavingsButton.Click += new System.EventHandler(this.AddToSavingsButton_Click);
             // 
             // WithdrawFromDepositButton
             // 
@@ -185,6 +186,7 @@
             this.WithdrawFromDepositButton.TabIndex = 0;
             this.WithdrawFromDepositButton.Text = "- Withdraw from Deposit";
             this.WithdrawFromDepositButton.UseVisualStyleBackColor = true;
+            this.WithdrawFromDepositButton.Click += new System.EventHandler(this.WithdrawFromDepositButton_Click);
             // 
             // WithdrawFromSavingsButton
             // 
@@ -195,6 +197,7 @@
             this.WithdrawFromSavingsButton.TabIndex = 0;
             this.WithdrawFromSavingsButton.Text = "- Withdraw from Savings";
             this.WithdrawFromSavingsButton.UseVisualStyleBackColor = true;
+            this.WithdrawFromSavingsButton.Click += new System.EventHandler(this.WithdrawFromSavingsButton_Click);
             // 
             // BankAccountOverviewPanel
             // 
